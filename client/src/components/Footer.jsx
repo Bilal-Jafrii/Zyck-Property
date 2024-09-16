@@ -63,7 +63,7 @@ export default function Footer() {
 
         <div>
           <h4 className="text-lg font-semibold mb-4 text-gray-300">Quick Links</h4>
-          <ul className="space-y-5 mt-6 ">
+          <ul className="space-y-3 mt-4 ">
         
         <li className="transition-all duration-300 flex items-center left-0 hover:left-1.5 relative"><svg
              className="inline  h-6 w-6 fill-green-400 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"   stroke="currentColor" strokeWidth="1" 
@@ -103,7 +103,7 @@ export default function Footer() {
 
         <div>
           <h4 className="text-lg font-semibold mb-4 text-gray-300">About Us</h4>
-          <ul className="space-y-5 mt-6 ">
+          <ul className="space-y-3 mt-4 ">
         <li className="transition-all duration-300 flex items-center left-0 hover:left-1.5 relative"><svg
              className="inline  h-6 w-6 fill-green-400 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"   stroke="currentColor" strokeWidth="1" 
               strokeLinecap="round" strokeLinejoin="round" >

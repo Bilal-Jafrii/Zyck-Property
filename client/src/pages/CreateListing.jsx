@@ -111,7 +111,7 @@ const handleChangeCity = (e) => {
       
 }
   const handleChange = (e) => {
-   if (e.target.id === 'sale' || e.target.id === 'rent') {
+   if (e.target.id === 'sale' || e.target.di === 'rent') {
       setFormData({
         ...formData,
         type: e.target.id,
@@ -227,16 +227,17 @@ const handleChangeCity = (e) => {
         <Select
           labelId="demo-simple-select-label"
           id="city"
+          required
           value={city}
           label="City"
           onChange={handleChangeCity}
         >
           <MenuItem value='karachi'>Karachi</MenuItem>
-          <MenuItem value='Hyderabad'>Hyderabad</MenuItem>
-          <MenuItem value='Peshawar'>Peshawar</MenuItem>
-          <MenuItem value='Quetta'>Quetta</MenuItem>
-          <MenuItem value='Lahore'>Lahore</MenuItem>
-          <MenuItem value='Islamabad'>Islamabad</MenuItem>
+          <MenuItem value='hyderabad'>Hyderabad</MenuItem>
+          <MenuItem value='peshawar'>Peshawar</MenuItem>
+          <MenuItem value='quetta'>Quetta</MenuItem>
+          <MenuItem value='lahore'>Lahore</MenuItem>
+          <MenuItem value='islamabad'>Islamabad</MenuItem>
         </Select>
       </FormControl>
     </Box>
@@ -248,14 +249,15 @@ const handleChangeCity = (e) => {
         <Select
           labelId="demo-simple-select-label"
           id="category"
+          required
           value={category}
           label="Category"
           onChange={handleChange2}
         >
-          <MenuItem value='House'>House</MenuItem>
-          <MenuItem value='Apartment'>Apartment</MenuItem>
-          <MenuItem value='Offices'>Offices</MenuItem>
-          <MenuItem value='Studio'>Studio</MenuItem>
+          <MenuItem value='house'>House</MenuItem>
+          <MenuItem value='apartment'>Apartment</MenuItem>
+          <MenuItem value='offices'>Offices</MenuItem>
+          <MenuItem value='studio'>Studio</MenuItem>
         </Select>
       </FormControl>
     </Box>

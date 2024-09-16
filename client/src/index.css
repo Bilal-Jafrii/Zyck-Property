@@ -11,6 +11,10 @@
 
 body{
     background-color: rgb(241, 245, 241);
+    font-family: "Changa", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
 }
 .gradient {
     background: linear-gradient(50deg, rgb(39, 194, 54) 38%, rgb(96, 227, 96) 68%,  rgb(53, 200, 68) 28%);

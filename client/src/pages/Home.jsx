@@ -46,6 +46,14 @@ export default function Home() {
     };
     fetchOfferListings();
   }, []);
+  const cities = [
+    {img:"6.jpg",name:"Karachi"},
+    {img:"7.jpeg",name:"Lahore"},
+    {img:"8.jpg",name:"Islamabad"},
+    {img:"11.jpeg",name:"Hyderabad"},
+    {img:"9.jpg",name:"Peshawar"},
+    {img:"10.jpeg",name:"Quetta"},
+  ]
   return (
     <div>
      
@@ -116,6 +124,32 @@ export default function Home() {
             </div>
           </div>
         )}
+       
+          <div className=''>
+             <div className='my-3 flex items-center justify-between'>
+             <div> <h2 className='text-2xl lg:text-4xl font-semibold lg:font-bold text-gradient'>Properties By Cities</h2>
+             </div>
+            
+            </div>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 my-8'>
+         {cities.map((city)=>(
+            
+          
+ <div className='flex relative'><img
+    src={city.img}     
+ alt='listing cover'
+ className='relative h-[320px] sm:h-[320px] w-[350px] object-cover hover:scale-105 transition-scale duration-300'
+/>
+<div className='absolute inset-x-0 bottom-0 flex flex-col items-center justify-center  gradient'>
+ <p className='font-extrabold'>{city.name}</p>
+  <p>10 Properties</p>
+  
+</div>
+</div>
+         ))} 
+         </div>
+          </div>
+      
       </div>
     </div>
   );

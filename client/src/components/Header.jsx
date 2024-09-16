@@ -1,9 +1,13 @@
-import { FaSearch } from 'react-icons/fa';
-import { Link} from 'react-router-dom';
+import { FaRegHeart } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
+
+
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import {  useState } from 'react';
+import { useEffect, useState } from 'react';
 import logo from '/logo.png'
 import {
+  Badge,
   Drawer,
   Dropdown,
   Menu,
@@ -11,63 +15,137 @@ import {
   MenuItem,
   ModalClose,
 } from "@mui/joy";
+import { MdOutlineAddHome } from 'react-icons/md';
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalVisible1, setIsModalVisible1] = useState(false);
 
+  const handleMouseEnter = () => {
+    setIsModalVisible(true);
+  };
+  const handleMouseEnter1 = () => {
+    setIsModalVisible1(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsModalVisible(false);
+  };
+  const handleMouseLeave1 = () => {
+    setIsModalVisible1(false);
+  };
   const openDrawer = () => {
     setOpen("success");
     
   };
 
   const { currentUser } = useSelector((state) => state.user);
-  
-  
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('searchTerm', searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get('searchTerm');
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [location.search]);
   return (
     <header className='navbar-gradient sticky top-0 shadow-md z-50'>
       <div>
-      <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
+      <div className='flex justify-evenly items-center max-w-6xl mx-auto p-3'>
         <Link to='/'>
         <img src={logo} width={120} height={60} alt="logo" />
-          {/* <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
-            <span className='text-slate-500'>OneClick</span>
-            <span className='text-slate-700'>Property</span>
-          </h1> */}
-        </Link>
         
-        <ul className='flex gap-4 items-center'>
-          <Link to={'/search?type=sale'}>
+        </Link>
+       
+        <ul className='flex gap-4 lg:gap-6 lg:mx-[250px] items-center'>
+          <Link to={'/'}>
             <li className='hidden sm:inline hover:gradient-text hover:underline text-white'>
-             Buy
+             Home
             </li>
           </Link>
-          <Link to={'/search?type=rent'}>
-            <li className='hidden sm:inline hover:gradient-text hover:underline text-white'>
-              Rent
-            </li>
-          </Link>
-          <Link to={'/search?offer=true'}>
-            <li className='hidden sm:inline hover:gradient-text hover:underline text-white'>
-             Offers
-            </li>
-          </Link>
-          <Link to='/profile'>
+          <div className='relative'>
+      <li
+        className='hidden cursor-pointer sm:inline hover:gradient-text hover:underline text-white'
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        Listings
+      </li>
+
+      {/* Modal */}
+      {isModalVisible && (
+        <div onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave} className='absolute top-6 left-0 bg-white p-4 rounded shadow-lg'>
+          <Link to={'/search?offer=true'}> <li className="font-semibold text-xl">Featured</li></Link>
+          <Link to={'/search?type=rent'}> <li className="font-semibold text-xl">Rent</li></Link>
+          <Link to={'/search?type=sale'}> <li className="font-semibold text-xl">Sale</li></Link>
+          
+        </div>
+      )}
+    </div>
+          <div className='relative'>
+      <li
+        className='hidden cursor-pointer sm:inline hover:gradient-text hover:underline text-white'
+        onMouseEnter={handleMouseEnter1}
+        onMouseLeave={handleMouseLeave1}
+      >
+        Pages
+      </li>
+
+      {/* Modal */}
+      {isModalVisible1 && (
+        <div onMouseEnter={handleMouseEnter1}
+        onMouseLeave={handleMouseLeave1} className='absolute py-4 px-8 top-6 left-0 bg-white  rounded shadow-lg'>
+          <Link to={'/contact-form'}> <li className="font-semibold text-xl">Contact us</li></Link>
+          <Link to={'/faqs'}> <li className="font-semibold text-xl">FAQs</li></Link>
+          <Link to={'/terms'}> <li className="font-semibold text-xl">Terms & - Conditions</li></Link>
+          <Link to={'/about'}> <li className="font-semibold text-xl">About</li></Link>
+          
+        </div>
+      )}
+    </div>
+          
+        
+         
+        </ul>
+        <ul className='flex items-center gap-5'>
+        <button className='font-small  hidden md:flex text-white p-[9px]  border rounded-xl'>
+          {currentUser ? (
+            <Link  className='flex items-center md:w-28 gap-2' to='/create-listing'><span><MdOutlineAddHome size={20}/></span>Add Listing</Link>
+            ) : (
+              <Link className='flex items-center md:w-28 gap-2 ' to='/sign-in'> <span><MdOutlineAddHome size={20}/></span>Add </Link>
+            )}
+          </button>
+          <button>
+          <Badge color="" overlap="circular" badgeContent={1} size='sm' variant="dot">
+
+            <div className="border-2 p-2 rounded-full"><span>
+            
+            <FaRegHeart color="white" size={20}/></span>
+            </div>
+            </Badge>
+            </button>
+        <Link to='/profile'>
             {currentUser ? (
               <img
-                className='rounded-full h-8 w-8 mr-5 md:mr-0 object-cover'
+                className='rounded-full h-9 w-9 mr-5 md:mr-0 object-cover'
                 src={currentUser.avatar}
                 alt='profile'
               />
             ) : (
-              <li className=' hover:gradient-text hover:underline text-white mr-6 md:mr-0 w-full '> Sign in</li>
+              <li className=' hover:gradient-text hover:underline text-white mr-6 md:mr-0 w-full '> <div className="border-2 p-2 rounded-full"><CgProfile size={22} /></div></li>
             )}
           </Link>
-          <button className='font-medium  hidden md:flex button '>
-          {currentUser ? (
-            <Link to='/create-listing'>Post AD</Link>
-            ) : (
-              <Link to='/sign-in'>Post AD</Link>
-            )}
-          </button>
+
         </ul>
 
         {/* drawer */}

@@ -11,10 +11,11 @@ import {
   FaChair,
   FaCity,
   FaPhoneAlt,
-  FaMapMarkedAlt,
+  
   FaMapMarkerAlt,
   FaParking,
   FaShare,
+  FaRulerCombined,
 } from 'react-icons/fa';
 import Contact from '../components/Contact';
 
@@ -110,7 +111,12 @@ export default function Listing() {
             <p className='flex items-center mt-6 gap-2 text-slate-600  text-sm'>
               <FaPhoneAlt className='text-green-700' />
               {listing.number}
-            </p></div>
+            </p>
+            <p className='flex items-center mt-6 gap-2 text-slate-600  text-sm'>
+              <FaRulerCombined className='text-green-700' />
+              {listing.area} sq.ft
+            </p>
+            </div>
             <div className='flex gap-4'>
               <p className='gradient w-full max-w-[200px] text-white text-center p-1 rounded-md'>
                 {listing.type === 'rent' ? 'For Rent' : 'For Sale'}
